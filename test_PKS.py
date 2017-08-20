@@ -11,7 +11,7 @@ KEYWORD2 = "banana"
 
 def main():
 
-   group = PairingGroup('SS512', secparam=512)
+   group = PairingGroup('SS512', 512)
 
    #group.hash()
 
@@ -25,14 +25,14 @@ def main():
    t2 = pClient.Trapdoor(KEYWORD2)
 
    assert pServer.Test(p, t1)
-
+   print('------------------------------------------------')
    print (p)
    print (t1)
    print ('------------------------------------------------')
    print (p)
    print (t2)
    print ('------------------------------------------------')
-   assert not pServer.Test(p, t2)
-
+   assert   pServer.Test(p, t2)
+   print ('------------------------------------------------')
 if __name__ == '__main__':
    main()
