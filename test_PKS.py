@@ -5,7 +5,7 @@ from toolbox.integergroup import IntegerGroup
 
 
 
-KEYWORD1 = "coconut"
+KEYWORD1 = "banaboo"
 KEYWORD2 = "banana"
 
 

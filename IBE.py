@@ -1,21 +1,21 @@
 
-from toolbox.pairinggroup import PairingGroup,ZR,GT
-from schemes.ibenc_adapt_identityhash import HashIDAdapter
-from schemes.ibenc_bb03 import IBE_BB04, IBEnc
-from schemes.ibenc_waters05 import IBE_N04
+from toolbox.pairinggroup import *
+from toolbox.hash_module import *
+
+from schemes.ibenc_bf01 import IBE_BonehFranklin
 
 
-groupObj = PairingGroup('SS512',secparam=512)
-ibe = IBE_BB04(groupObj)
-(params, mk) = ibe.setup()
+groupObj = PairingGroup('d224.param', 1024)
+ibe = IBE_BonehFranklin(groupObj)
 
-# represents public identity
-kID = groupObj.random(ZR)
-key = ibe.extract(mk, kID)
+(pk, sk) = ibe.setup()
 
-M = groupObj.random(GT)
-cipher = ibe.encrypt(params, kID, M)
-m = ibe.decrypt(params, key, cipher)
+id = 'ayo@email.com'
+key = ibe.extract(sk, id)
 
-assert m == M, "FAILED Decryption!"
-print("Successful Decryption!! M => '%s'" % m)
+m = "hello world!!!!!"
+ciphertext = ibe.encrypt(pk, id, m)
+
+msg = ibe.decrypt(pk, key, ciphertext)
+assert msg == m, "failed decrypt: \n%s\n%s" % (msg, m)
+print("Successful Decryption!!!")
