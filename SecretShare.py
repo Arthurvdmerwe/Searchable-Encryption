@@ -3,7 +3,8 @@
 from toolbox.secretshare import SecretShare
 from toolbox.pairinggroup import PairingGroup,ZR
 
-class ShamirSecretSharing:
+class Shamir:
+
     def __init__(self, secret):
         self.k = 3
         self.n = 4
