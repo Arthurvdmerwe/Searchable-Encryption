@@ -12,8 +12,8 @@ class Threshold_ElGamal:
         self.pk = pk
         self.sk = sk
 
-    def getPK(self):
-        return self.pk
+    #def getPK(self):
+    #    return self.pk
 
     #def getSK(self):
     #    return self.sk

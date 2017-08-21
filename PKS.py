@@ -50,21 +50,12 @@ class PEKSClient:
       return self.group.hash(word, G1) ** self.priv
 
 
-class PEKSServer:
-   def __init__(self, grpObj, pub):
 
-      self.group = grpObj
-      self.group.H = self.H
-      self.h2 = Hash(pairingElement=self.group, htype='sha1')
-      self.pub = pub
-
-   def H(self, args, type=G2):
-      return self.group.hash(args, type)
 
    '''	Test(A_pub,S,T_W): When the messaging server receives a 
    Test function from the legal authority as S=[A,B] it can test if H_2 (e(T_w,A))=B'''
    def Test(self, s, tw):
       a, b = s
-      print(self.h2.hashToZn(pair(tw, a)))
+      print(self.h1.hashToZn(pair(tw, a)))
       #print(b)
-      return self.h2.hashToZn(pair(tw, a)) == b
+      return self.h1.hashToZn(pair(tw, a)) == b
