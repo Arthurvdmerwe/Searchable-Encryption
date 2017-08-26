@@ -1,7 +1,7 @@
 
 from toolbox.pairinggroup import *
 from toolbox.hash_module import *
-
+import time
 from schemes.ibenc_bf01 import IBE_BonehFranklin
 
 
@@ -31,14 +31,31 @@ class IBE:
 
 
 if __name__ == '__main__':
+    time1 = time.time()
     ibe = IBE()
+    time2 = time.time()
+    print('%s function took %0.3f ms' % ("Initiating IBE", (time2 - time1) * 1000))
+
     ibe2 = IBE()
 
     ibe2.setIdentity('peter@herts.ac.uk')
-    ibe.setIdentity('arthur.vandermerwe@westpac.com.au')
 
+    time3 = time.time()
+    ibe.setIdentity('arthur.vandermerwe@westpac.com.au')
+    time4 = time.time()
+    print('%s function took %0.3f ms' % ("Setting Identity", (time4 - time3) * 1000))
+
+    time5 = time.time()
     ciphertext = ibe.encrypt('message')
+    time6 = time.time()
+    print('%s function took %0.3f ms' % ("Encryption", (time6 - time5) * 1000))
+
+
     ciphertext2 = ibe2.encrypt('message')
 
+    time7 = time.time()
     ibe.decrypt(ciphertext)
-    ibe2.decrypt(ciphertext)
+    time8 = time.time()
+    print('%s function took %0.3f ms' % ("Decryption", (time8 - time7) * 1000))
+
+    #ibe2.decrypt(ciphertext)

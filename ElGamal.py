@@ -96,3 +96,4 @@ if __name__ == '__main__':
     el.RecoverSecret()
     time10= time.time()
     print ('%s function took %0.3f ms' % ("Recovering Secret", (time10 - time9)*1000.0))
+

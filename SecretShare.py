@@ -2,7 +2,7 @@
 
 from toolbox.secretshare import SecretShare
 from toolbox.pairinggroup import PairingGroup,ZR
-
+import time
 class Shamir:
 
     def __init__(self, secret):
@@ -28,7 +28,17 @@ class Shamir:
 if __name__ == '__main__':
 
 #Test Secret Sharing
-
+    time1 = time.time()
     sh = Shamir(10519865178556314507372829289402446664989949293459045562116909548466503245062007515340903772742587227490252706716592603738153226430667106582098446163222092298895072223005902735406151155098458263113996593288431704943669561903201783705478080949723622879177900831232543138340985242764836383559333313982615832160)
+    time2 = time.time()
+    print('%s function took %0.3f ms' % ("Init", (time2 - time1) * 1000))
+
+    time3 = time.time()
     shares = sh.getShares()
+    time4 = time.time()
+    print('%s function took %0.3f ms' % ("getShares", (time4 - time3) * 1000))
+
+    time5 = time.time()
     sh.recoverSecret(shares)
+    time6 = time.time()
+    print('%s function took %0.3f ms' % ("Recover ", (time6 - time5) * 100))

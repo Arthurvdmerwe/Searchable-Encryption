@@ -2,24 +2,19 @@ import sys
 from toolbox.pairinggroup import PairingGroup,pair
 from toolbox.pairinggroup import  ZR,G1,G2,pair
 from toolbox.hash_module import Hash, Exp
+from toolbox.eccurve import *
 
 
-class PEKSClient:
+class PKS:
 
    def __init__(self, grpObj):
 
       self.group = grpObj
-      #self.g = self.group.random(G1)
-      #self.r = self.group.random(G2)
-      #self.t = pair(self.g, self.r)
-      #print("Pairing Between G1 and G2 '%s'" %self.t)
 
-      self.group.H = self.H
 
       self.h1 = Hash(pairingElement=self.group, htype='sha1')
 
-   def H(self, args, type=G1):
-      return self.group.hash(args, type)
+
 
 
    '''KeyGen(s): The security parameter s determines the size of the prime order p of the groups G_1and G_2. 
@@ -63,20 +58,20 @@ class PEKSClient:
    Test function from the legal authority as S=[A,B] it can test if H_2 (e(T_w,A))=B'''
    def Test(self, s, tw):
       a, b = s
-      print(self.h1.hashToZn(pair(tw, a)))
+      print(self.h1.hashToZn(str(pair(tw, a))))
       print(b)
-      return self.h1.hashToZn(pair(tw, a)) == self.h1.hashToZn(b)
+      return self.h1.hashToZn(str(pair(tw, a))) == self.h1.hashToZn(str(b))
 
 
 if __name__ == '__main__':
-    group = PairingGroup('SS512', 512)
+    group = PairingGroup('SS512')
 
 
 
     KEYWORD1 = "fishing"
     KEYWORD2 = "banana"
 
-    pClient = PEKSClient(group)
+    pClient = PKS(group)
     pubKey = pClient.KeyGen()
 
     p = pClient.PEKS(KEYWORD1)
