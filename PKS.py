@@ -15,8 +15,6 @@ class PKS:
       self.h1 = Hash(pairingElement=self.group, htype='sha1')
 
 
-
-
    '''KeyGen(s): The security parameter s determines the size of the prime order p of the groups G_1and G_2. 
    The legal authority then also selects a random α ∈Z_p^* and a generator g of G_1. 
    The Output is a public key A_pub=[g,h=g^α] and a private key α. The public key is then distributed to the messaging server.'''

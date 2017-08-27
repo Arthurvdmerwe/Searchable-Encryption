@@ -2,8 +2,8 @@
 
 class LegalAuthority:
 
-    def __init__(self):
-        pass
+    def __init__(self, identity):
+        self.setIdentity(identity)
 
     def setIdentity(self, identity):
         self.identity = identity
@@ -16,3 +16,6 @@ class LegalAuthority:
 
     def getShare(self):
         return self.share
+
+    def Show(self):
+        print("Legal Authority: Identity '%s' have share '%s'" % (self.identity, self.share) )
