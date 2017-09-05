@@ -3,6 +3,7 @@ from toolbox.pairinggroup import PairingGroup,pair
 from toolbox.pairinggroup import  ZR,G1,G2,pair
 from toolbox.hash_module import Hash, Exp
 from toolbox.eccurve import *
+import time
 
 
 class PKS:
@@ -10,8 +11,6 @@ class PKS:
    def __init__(self, grpObj):
 
       self.group = grpObj
-
-
       self.h1 = Hash(pairingElement=self.group, htype='sha1')
 
 
@@ -69,14 +68,33 @@ if __name__ == '__main__':
     KEYWORD1 = "fishing"
     KEYWORD2 = "banana"
 
+    time1 = time.time()
     pClient = PKS(group)
-    pubKey = pClient.KeyGen()
+    time2 = time.time()
+    print('%s function took %0.3f ms' % ("Initiating Pairing Groups", (time2 - time1) * 1000))
 
+    time3 = time.time()
+    pubKey = pClient.KeyGen()
+    time4 = time.time()
+    print('%s function took %0.3f ms' % ("Generating Keys", (time4 - time3) * 1000))
+
+    time5 = time.time()
     p = pClient.PEKS(KEYWORD1)
+    time6 = time.time()
+    print('%s function took %0.3f ms' % ("Generating PKS", (time6 - time5) * 1000))
+
+    time7 = time.time()
     t1 = pClient.Trapdoor(KEYWORD1)
+    time8 = time.time()
+    print('%s function took %0.3f ms' % ("Generating Trapdoor", (time8 - time7) * 100))
+
     t2 = pClient.Trapdoor(KEYWORD2)
 
+    time9 = time.time()
     assert pClient.Test(p, t1)
+    time10 = time.time()
+    print('%s function took %0.3f ms' % ("Test ", (time10 - time9) * 100))
+
     print('------------------------------------------------')
     print(p)
     print(t1)
